@@ -2,16 +2,12 @@ const response = require('../res/response');
 const conn = require('../db/connection');
 
 exports.getData = (req, res) => {
-    response.ok(res, { message: 'success' });
+    conn.query('SELECT * FROM user', (err, result) => {
+        if (err) return response.notOk(res, 'not found', 404);
+        response.ok(res, result);
+    });
 };
 
 exports.index = (req, res) => {
     res.send('Halo')
 };
-
-exports.ha = (req, res) => {
-    conn.query('INSERT INTO user VALUES (?, ?, ?, ?, ?)', [req.query.id, req.query.username, req.query.firstname, req.query.lastname, req.query.privilege], (err, result) => {
-        if (err) return res.send(err);
-        res.send('good');
-    })
-}
