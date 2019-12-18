@@ -10,5 +10,5 @@ exports.index = (req, res) => {
 };
 
 exports.ha = (req, res) => {
-    res.send({ tes: res.query.tes })
+    res.send({ tes: req.query.tes })
 }
