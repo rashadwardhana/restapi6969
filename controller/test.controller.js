@@ -10,5 +10,8 @@ exports.index = (req, res) => {
 };
 
 exports.ha = (req, res) => {
-    res.send({ tes: req.query.tes })
+    conn.query('INSERT INTO user VALUES ?, ?, ?, ?, ?', [req.query.id, req.query.username, req.query.firstname, req.query.lastname, req.query.privilege], (err, result) => {
+        if (err) return res.send('ellol');
+        res.send('good');
+    })
 }
